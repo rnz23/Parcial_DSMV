@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Juego_Colores</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txtTitulo">JUEGO DE COLORES</string>
+    <string name="txtDescripcion">SIMPLE Y SENCILLO:\nPulse el botón que coincida con el color que aparece en la pantalla!!\nTienes 30 segundos!!!</string>
+    <string name="btnJugar">JUGAR!</string>
+</resources>
