@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".GameFragment">
+
+    <TextView
+        android:id="@+id/txtTiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtTiempo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    
+    <TextView
+        android:id="@+id/txtPuntaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtPuntaje"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--COLOR PARA ADIVINAR -->
+    <TextView
+        android:id="@+id/txtColorAdivinar"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPuntaje"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <!--Instrucciomn pequeña -->
+    <TextView
+        android:id="@+id/txtInstruccion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/txtInstruccion"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtColorAdivinar" />
+    
+    <!--Botones del Juego -->
+    <Button
+        android:id="@+id/btnRojo"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/txtRojo"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="312dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnVerde"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/txtVerde"
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="312dp" 
+        tools:ignore="MissingConstraints"/>
+
+    <Button
+        android:id="@+id/btnAzul"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/txtAzul"
+        tools:layout_editor_absoluteX="262dp"
+        tools:layout_editor_absoluteY="312dp" 
+        tools:ignore="MissingConstraints"/>
+
+    <Button
+        android:id="@+id/btnNaranja"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/txtNaranja"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="391dp" />
+
+    <Button
+        android:id="@+id/btnMorado"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="@string/txtMorado"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="391dp"
+        tools:ignore="MissingConstraints"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
