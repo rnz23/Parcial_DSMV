@@ -18,15 +18,23 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private lateinit var txtTiempo: TextView
     private lateinit var txtColorObjetivo: TextView
     private lateinit var txtColorAdivinar: TextView
+    private lateinit var soundManager: SoundManager
 
     private val colores = listOf("ROJO", "VERDE", "AZUL","MORADO", "NARANJA")
     private var colorActual = ""
 
     override fun onViewCreated(view:View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+
+        soundManager= SoundManager(requireContext())
         inicializarVistas(view)
         configurarBotones(view)
         iniciarJuego()
+    }
+
+    override fun onDestroyView(){
+        super.onDestroyView()
+        soundManager.release()
     }
 
     private fun inicializarVistas(view: View){
@@ -70,9 +78,11 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         if (colorSeleccionado == colorActual) {
             // Acierto
             puntaje++
+            soundManager.playSound(R.raw.acierto_sound)
             Toast.makeText(requireContext(), "¡Correcto! +1 punto", Toast.LENGTH_SHORT).show()
         } else {
             // Error
+            soundManager.playSound(R.raw.error_sound)
             Toast.makeText(requireContext(), "Incorrecto. Era $colorActual", Toast.LENGTH_SHORT).show()
         }
         generarNuevoColor()
@@ -80,6 +90,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 
         // Por ahora, navegar a resultados después de 5 puntos (para probar)
         if (puntaje >= 5) {
+            soundManager.playSound(R.raw.fin_juego_positivo)
             terminarJuego()
         }
     }
