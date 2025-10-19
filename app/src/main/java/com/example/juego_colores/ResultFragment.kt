@@ -1,59 +1,84 @@
 package com.example.juego_colores
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ResultFragment : Fragment(R.layout.fragment_result) {
+    private lateinit var txtPuntajeFinal : TextView
+    private lateinit var txtMensajePuntaje: TextView
+    private lateinit var btnJugardeNuevo: Button
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ResultFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ResultFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    // Para SharedPreferences (mejor puntaje básico)
+    private lateinit var sharedPreferences: SharedPreferences
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Inicializar vistas
+        inicializarVistas(view)
+
+        // Configurar SharedPreferences para el mejor puntaje
+        configurarSharedPreferences()
+
+        // Obtener puntaje y mostrar resultados
+        mostrarResultados()
+
+        // Configurar botones
+        configurarBotones()
+    }
+    private fun inicializarVistas(view: View) {
+        txtPuntajeFinal = view.findViewById(R.id.txtPuntajeFinal)
+        txtMensajePuntaje = view.findViewById(R.id.txtMensajePuntaje)
+        btnJugardeNuevo = view.findViewById(R.id.btnJugardeNuevo)
+    }
+
+    private fun configurarSharedPreferences() {
+        sharedPreferences = requireContext().getSharedPreferences("juego_prefs", Context.MODE_PRIVATE)
+    }
+    private fun mostrarResultados() {
+        // Obtener puntaje actual del Bundle
+        val puntajeActual = arguments?.getInt("puntaje", 0) ?: 0
+
+        // Mostrar puntaje actual
+        txtPuntajeFinal.text = "Puntaje: $puntajeActual"
+
+        // Mostrar mensaje según el puntaje
+        val mensaje = when (puntajeActual) {
+            in 0..2 -> "¡Sigue practicando! 💪"
+            in 3..4 -> "¡Buen trabajo! 👍"
+            in 5..7 -> "¡Excelente! 🎯"
+            else -> "¡Increíble! 🏆"
+        }
+        txtMensajePuntaje.text = mensaje
+
+        // Guardar mejor puntaje si es récord
+        val mejorPuntaje = sharedPreferences.getInt("mejor_puntaje", 0)
+        if (puntajeActual > mejorPuntaje) {
+            // ¡Nuevo récord!
+            sharedPreferences.edit().putInt("mejor_puntaje", puntajeActual).apply()
+            txtPuntajeFinal.text = "🏆 NUEVO RÉCORD: $puntajeActual"
+            txtPuntajeFinal.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.holo_green_dark))
+            // Mostrar Toast de felicitación
+            Toast.makeText(requireContext(), "¡Nuevo récord establecido!", Toast.LENGTH_LONG).show()
+        } else {
+            // Mostrar mejor puntaje también
+            txtMensajePuntaje.text = "$mensaje\nMejor puntaje: $mejorPuntaje"
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result, container, false)
+    private fun configurarBotones() {
+        btnJugardeNuevo.setOnClickListener {
+            // Volver al WelcomeFragment (limpiando el back stack)
+            findNavController().popBackStack(R.id.welcomeFragment, false)
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ResultFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ResultFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

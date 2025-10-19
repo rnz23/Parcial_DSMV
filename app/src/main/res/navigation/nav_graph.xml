@@ -13,12 +13,12 @@
 
             <action
                 android:id="@+id/action_welcomeFragment_to_gameFragment"
-                app:destintation="@id/gameFragment"/>
+                app:destination="@id/gameFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.juego_colores.WelcomeFragment"
+        android:name="com.example.juego_colores.GameFragment"
         android:label="GameFragment"
         tools:layout="@layout/fragment_game">
 
@@ -26,5 +26,10 @@
             android:id="@+id/action_gameFragment_to_resultFragment"
             app:destination="@id/resultFragment"/>
     </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.juego_colores.ResultFragment"
+        android:label="ResultFragment"
+        tools:layout="@layout/fragment_result" />
 
 </navigation>

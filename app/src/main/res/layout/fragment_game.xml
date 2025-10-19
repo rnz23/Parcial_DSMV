@@ -1,94 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF"
+    android:padding="16dp"
     tools:context=".GameFragment">
 
+    <!-- Tiempo Restante -->
     <TextView
         android:id="@+id/txtTiempo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtTiempo"
+        android:textColor="#FF6B6B"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
+    <!-- Puntaje Actual -->
     <TextView
         android:id="@+id/txtPuntaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtPuntaje"
+        android:textColor="#4ECDC4"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--COLOR PARA ADIVINAR -->
+    <!-- Color a Adivinar -->
     <TextView
         android:id="@+id/txtColorAdivinar"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
         android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:background="#FF6B6B"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPuntaje"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.1" />
 
-    <!--Instrucciomn pequeña -->
+    <!-- Instrucción -->
     <TextView
         android:id="@+id/txtInstruccion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/txtInstruccion"
+        android:textColor="#666666"
+        android:textSize="16sp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtColorAdivinar" />
-    
-    <!--Botones del Juego -->
-    <Button
-        android:id="@+id/btnRojo"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="@string/txtRojo"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="312dp"
-        tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/btnVerde"
+    <!-- CONTENEDOR PARA BOTONES - Primera Fila -->
+    <LinearLayout
+        android:id="@+id/fila1Botones"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="@string/txtVerde"
-        tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="312dp" 
-        tools:ignore="MissingConstraints"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInstruccion">
 
-    <Button
-        android:id="@+id/btnAzul"
+        <!-- Botón Rojo -->
+        <Button
+            android:id="@+id/btnRojo"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:text="@string/txtRojo"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#FF6B6B"
+            android:elevation="4dp" />
+
+        <!-- Botón Verde -->
+        <Button
+            android:id="@+id/btnVerde"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:text="@string/txtVerde"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#4ECDC4"
+            android:elevation="4dp" />
+
+    </LinearLayout>
+
+    <!-- Segunda Fila de Botones -->
+    <LinearLayout
+        android:id="@+id/fila2Botones"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="@string/txtAzul"
-        tools:layout_editor_absoluteX="262dp"
-        tools:layout_editor_absoluteY="312dp" 
-        tools:ignore="MissingConstraints"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fila1Botones">
 
-    <Button
-        android:id="@+id/btnNaranja"
+        <!-- Botón Azul -->
+        <Button
+            android:id="@+id/btnAzul"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:text="@string/txtAzul"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#45B7D1"
+            android:elevation="4dp" />
+
+        <!-- Botón Morado -->
+        <Button
+            android:id="@+id/btnMorado"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:text="@string/txtMorado"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#A358DF"
+            android:elevation="4dp" />
+
+    </LinearLayout>
+
+    <!-- Tercera Fila de Botones -->
+    <LinearLayout
+        android:id="@+id/fila3Botones"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="@string/txtNaranja"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="62dp"
-        tools:layout_editor_absoluteY="391dp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fila2Botones">
 
-    <Button
-        android:id="@+id/btnMorado"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="@string/txtMorado"
-        tools:layout_editor_absoluteX="198dp"
-        tools:layout_editor_absoluteY="391dp"
-        tools:ignore="MissingConstraints"/>
+        <!-- Botón Naranja -->
+        <Button
+            android:id="@+id/btnNaranja"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:text="@string/txtNaranja"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#FF9A5B"
+            android:elevation="4dp" />
 
+        <!-- Espacio para futuro botón (opcional) -->
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

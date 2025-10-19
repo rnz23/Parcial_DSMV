@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ResultFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/txtPestañaResultados"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/txtTituloResultados"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/txtPuntajeFinal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/txtPuntajeFinalObtenido"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPestañaResultados" />
 
-</FrameLayout>
+    <!-- Mensaje segun puntaje -->
+    <TextView
+        android:id="@+id/txtMensajePuntaje"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/txtMensaje_segun_Puntaje"
+        android:textColor="#FF6B6B"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPuntajeFinal" />
+    
+    <Button
+        android:id="@+id/btnJugardeNuevo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btnJugardeNuevo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

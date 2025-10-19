@@ -1,6 +1,7 @@
 package com.example.juego_colores
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 
 import android.view.View
@@ -16,9 +17,11 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private var tiempoRestante = 30
     private lateinit var txtPuntaje: TextView
     private lateinit var txtTiempo: TextView
-    private lateinit var txtColorObjetivo: TextView
     private lateinit var txtColorAdivinar: TextView
     private lateinit var soundManager: SoundManager
+    private var temporizadorColor: CountDownTimer? = null
+
+    private var tiempoPorColor = 3000L // 3 segundos por color
 
     private val colores = listOf("ROJO", "VERDE", "AZUL","MORADO", "NARANJA")
     private var colorActual = ""
@@ -34,6 +37,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 
     override fun onDestroyView(){
         super.onDestroyView()
+        temporizadorColor?.cancel()
         soundManager.release()
     }
 
@@ -53,6 +57,8 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     }
 
     private fun iniciarJuego() {
+        tiempoRestante =30
+        puntaje=0
         generarNuevoColor()
         actualizarUI()
 
@@ -61,20 +67,42 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     }
 
     private fun generarNuevoColor() {
+        temporizadorColor?.cancel()
         colorActual = colores.random()
-        txtColorObjetivo.text = colorActual
+        txtColorAdivinar.text = colorActual
 
         // También cambiar el color de fondo del TextView
         when (colorActual) {
-            "ROJO" -> txtColorObjetivo.setBackgroundColor(requireContext().getColor(android.R.color.holo_red_light))
-            "VERDE" -> txtColorObjetivo.setBackgroundColor(requireContext().getColor(android.R.color.holo_green_light))
-            "AZUL" -> txtColorObjetivo.setBackgroundColor(requireContext().getColor(android.R.color.holo_blue_light))
-            "MORADO" -> txtColorObjetivo.setBackgroundColor(requireContext().getColor(android.R.color.holo_purple))
-            "NARANJA" -> txtColorObjetivo.setBackgroundColor(requireContext().getColor(android.R.color.holo_orange_dark))
+            "ROJO" -> txtColorAdivinar.setBackgroundColor(requireContext().getColor(android.R.color.holo_red_light))
+            "VERDE" -> txtColorAdivinar.setBackgroundColor(requireContext().getColor(android.R.color.holo_green_light))
+            "AZUL" -> txtColorAdivinar.setBackgroundColor(requireContext().getColor(android.R.color.holo_blue_light))
+            "MORADO" -> txtColorAdivinar.setBackgroundColor(requireContext().getColor(android.R.color.holo_purple))
+            "NARANJA" -> txtColorAdivinar.setBackgroundColor(requireContext().getColor(android.R.color.holo_orange_dark))
         }
+        iniciarTemporizadorColor()
+    }
+
+    private fun iniciarTemporizadorColor() {
+        temporizadorColor = object : CountDownTimer(tiempoPorColor, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val segundosRestantes = (millisUntilFinished / 1000).toInt()
+                txtTiempo.text = "Tiempo: ${segundosRestantes}s"
+            }
+            override fun onFinish() {
+                // ✅ TIEMPO AGOTADO - Cuenta como error
+                println("❌ Tiempo agotado para color: $colorActual")
+                // soundManager.playSound(R.raw.error_sound) // Comentado temporalmente
+                Toast.makeText(requireContext(), "¡Tiempo agotado! Era $colorActual", Toast.LENGTH_SHORT).show()
+
+                // Generar nuevo color automáticamente
+                generarNuevoColor()
+                actualizarUI()
+            }
+        }.start()
     }
 
     private fun verificarRespuesta(colorSeleccionado: String) {
+        temporizadorColor?.cancel()
         if (colorSeleccionado == colorActual) {
             // Acierto
             puntaje++
@@ -92,12 +120,15 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         if (puntaje >= 5) {
             soundManager.playSound(R.raw.fin_juego_positivo)
             terminarJuego()
+        }else{
+        // Continuar con nuevo color
+        generarNuevoColor()
+        actualizarUI()
         }
     }
 
     private fun actualizarUI() {
         txtPuntaje.text = "Puntaje: $puntaje"
-        txtTiempo.text = "Tiempo: ${tiempoRestante}s"
     }
 
 

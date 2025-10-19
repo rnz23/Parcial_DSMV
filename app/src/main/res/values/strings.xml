@@ -5,7 +5,7 @@
     <string name="txtTitulo">JUEGO DE COLORES</string>
     <string name="txtDescripcion">SIMPLE Y SENCILLO:\nPulse el botón que coincida con el color que aparece en la pantalla!!\nTienes 30 segundos!!!</string>
     <string name="btnJugar">JUGAR!</string>
-    <string name="txtTiempo">Tiempo 30s!</string>
+    <string name="txtTiempo">03 s!</string>
     <string name="txtPuntaje">Puntaje: 0</string>
     <string name="txtInstruccion">Pulsa el boton que coincida con el color mostrado.</string>
     <string name="txtRojo">ROJO</string>
@@ -13,4 +13,9 @@
     <string name="txtAzul">AZUL</string>
     <string name="txtNaranja">NARANJA</string>
     <string name="txtMorado">MORADO</string>
+    <string name="txtTituloResultados">RESULTADOS FINALES</string>
+    <string name="txtPuntajeFinalObtenido">Puntaje Obtenido: 0</string>
+    <string name="txtMensaje_segun_Puntaje">¡Buen Trabajo!</string>
+    <string name="btnJugardeNuevo">Jugar de Nuevo</string>
+
 </resources>
