@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/color_background"
     android:padding="16dp"
     tools:context=".GameFragment">
 
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtPuntaje"
-        android:textColor="#4ECDC4"
+        android:textColor="@color/color_success"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/txtInstruccion"
-        android:textColor="#666666"
+        android:textColor="@color/text_secondary"
         android:textSize="16sp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,10 +81,10 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:text="@string/txtRojo"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:backgroundTint="#FF6B6B"
+            android:backgroundTint="@color/color_rojo"
             android:elevation="4dp" />
 
         <!-- Botón Verde -->
@@ -95,10 +95,10 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:text="@string/txtVerde"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:backgroundTint="#4ECDC4"
+            android:backgroundTint="@color/color_verde"
             android:elevation="4dp" />
 
     </LinearLayout>
@@ -123,10 +123,10 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:text="@string/txtAzul"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:backgroundTint="#45B7D1"
+            android:backgroundTint="@color/color_azul"
             android:elevation="4dp" />
 
         <!-- Botón Morado -->
@@ -137,10 +137,10 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:text="@string/txtMorado"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:backgroundTint="#A358DF"
+            android:backgroundTint="@color/color_morado"
             android:elevation="4dp" />
 
     </LinearLayout>
@@ -165,10 +165,10 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:text="@string/txtNaranja"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:backgroundTint="#FF9A5B"
+            android:backgroundTint="@color/color_naranja"
             android:elevation="4dp" />
 
         <!-- Espacio para futuro botón (opcional) -->

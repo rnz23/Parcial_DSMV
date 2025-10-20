@@ -9,15 +9,17 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import android.widget.Button
 import android.widget.Toast
-
+import kotlin.math.max
 
 
 class GameFragment : Fragment(R.layout.fragment_game) {
     private var puntaje = 0
-    private var tiempoRestante = 30
+    private var intentosTotales = 0
+    private val maxIntentos = 5
     private lateinit var txtPuntaje: TextView
     private lateinit var txtTiempo: TextView
     private lateinit var txtColorAdivinar: TextView
+    private lateinit var txtIntentos: TextView
     private lateinit var soundManager: SoundManager
     private var temporizadorColor: CountDownTimer? = null
 
@@ -45,6 +47,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         txtPuntaje = view.findViewById(R.id.txtPuntaje)
         txtTiempo= view.findViewById(R.id.txtTiempo)
         txtColorAdivinar = view.findViewById<TextView>(R.id.txtColorAdivinar)
+        txtIntentos = view.findViewById(R.id.txtTiempo)
     }
 
     private fun configurarBotones(view: View) {
@@ -57,7 +60,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     }
 
     private fun iniciarJuego() {
-        tiempoRestante =30
+        intentosTotales=0
         puntaje=0
         generarNuevoColor()
         actualizarUI()
@@ -89,20 +92,26 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 txtTiempo.text = "Tiempo: ${segundosRestantes}s"
             }
             override fun onFinish() {
-                // ✅ TIEMPO AGOTADO - Cuenta como error
+
                 println("❌ Tiempo agotado para color: $colorActual")
-                // soundManager.playSound(R.raw.error_sound) // Comentado temporalmente
+                soundManager.playSound(R.raw.error_sound)
                 Toast.makeText(requireContext(), "¡Tiempo agotado! Era $colorActual", Toast.LENGTH_SHORT).show()
 
-                // Generar nuevo color automáticamente
-                generarNuevoColor()
-                actualizarUI()
+               intentosTotales++
+                if(intentosTotales>= maxIntentos){
+                    terminarJuego()
+                }else{
+                    generarNuevoColor()
+                    actualizarUI()
+                }
+
             }
         }.start()
     }
 
     private fun verificarRespuesta(colorSeleccionado: String) {
         temporizadorColor?.cancel()
+        intentosTotales++
         if (colorSeleccionado == colorActual) {
             // Acierto
             puntaje++
@@ -113,22 +122,19 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             soundManager.playSound(R.raw.error_sound)
             Toast.makeText(requireContext(), "Incorrecto. Era $colorActual", Toast.LENGTH_SHORT).show()
         }
-        generarNuevoColor()
-        actualizarUI()
-
-        // Por ahora, navegar a resultados después de 5 puntos (para probar)
-        if (puntaje >= 5) {
+        if(intentosTotales >= maxIntentos){
             soundManager.playSound(R.raw.fin_juego_positivo)
             terminarJuego()
         }else{
-        // Continuar con nuevo color
-        generarNuevoColor()
-        actualizarUI()
+            generarNuevoColor()
+            actualizarUI()
         }
     }
 
     private fun actualizarUI() {
         txtPuntaje.text = "Puntaje: $puntaje"
+        val intentosRestantes = maxIntentos - intentosTotales
+        txtTiempo.text ="Intentos: $intentosRestantes/$maxIntentos"
     }
 
 
@@ -136,6 +142,13 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         // Navegar al fragment de resultados con el puntaje
         val bundle = Bundle().apply {
             putInt("puntaje", puntaje)
+        }
+
+        val mensajeFinal = when {
+            puntaje == maxIntentos -> "¡PERFECTO! "
+            puntaje >= maxIntentos - 1 -> "¡Excelente! "
+            puntaje >= maxIntentos - 2 -> "¡Buen trabajo! "
+            else -> "¡Sigue practicando! "
         }
         findNavController().navigate(R.id.action_gameFragment_to_resultFragment, bundle)
     }

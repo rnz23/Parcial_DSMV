@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeFragment">
+    tools:context=".WelcomeFragment"
+    android:background="@color/color_background"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/txtTitulo"
@@ -12,9 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:gravity="center"
-
-
+        android:textSize="32sp"
+        android:textStyle="bold"
         android:text="@string/txtTitulo"
+        android:textColor="@color/text_primary"
+        android:shadowColor="@color/color_shadow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,10 +29,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:textSize="16sp"
         android:gravity="center"
-
-
+        android:lineSpacingExtra="4sp"
         android:text="@string/txtDescripcion"
+        android:color="@color/text_secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +44,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:backgroundTint="#FF6B6B"
+        android:textColor="#FFFFFF"
+        android:paddingVertical="16dp"
         android:text="@string/btnJugar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
